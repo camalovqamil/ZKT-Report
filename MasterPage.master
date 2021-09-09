@@ -1,0 +1,49 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link rel="icon" href="img/Education.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link href="StyleSheet.css" rel="stylesheet" />
+
+    <title>ZKT</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+            font-size: 14pt;
+            height: 50px;
+        }
+        .auto-style2 {
+            width:14.2857%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server" style="width:100%; height:100%;">
+        <div class="menu">
+            <table class="auto-style1">
+                <tr>
+                    <td class="auto-style2"><a href="Home.aspx"><i class="fas fa-home"></i>Ana ekran</a></td>
+                    <td class="auto-style2"><a href="DaysWorker.aspx"><i class="fas fa-network-wired"></i>Digər</a></td>
+                    <td class="auto-style2"><a href="Groups.aspx"><i class="fas fa-user-friends"></i>Qrup</a></td>
+                    <td class="auto-style2"><a href="Workers.aspx"><i class="fas fa-users"></i>İşçilər</a></td>
+                    <td class="auto-style2"><a href="GroupReport.aspx"><i class="fas fa-history"></i>Qrup reportu</a></td>
+                    <td class="auto-style2"><a href="GroupDaysReport.aspx"><i class="fas fa-history"></i>Digər report</a></td>
+                    <td class="auto-style2"><a href="AllWorkerReport.aspx"><i class="fas fa-history"></i>Bütün işçilər</a></td>
+                </tr>
+            </table>
+
+        </div>
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

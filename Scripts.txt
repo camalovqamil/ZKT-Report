@@ -1,0 +1,1479 @@
+﻿USE [IshCedveli]
+GO
+
+/****** Object:  Table [dbo].[GroupDays]    Script Date: 08.09.2021 12:57:42 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[GroupDays](
+	[DaysGroupOid] [nvarchar](50) NULL,
+	[GroupName] [nvarchar](150) NULL,
+	[InsertData] [datetime] NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[GroupDays] ADD  CONSTRAINT [DF_GroupDays_DaysGroupOid]  DEFAULT (newid()) FOR [DaysGroupOid]
+GO
+
+ALTER TABLE [dbo].[GroupDays] ADD  CONSTRAINT [DF_GroupDays_InsertData]  DEFAULT (getdate()) FOR [InsertData]
+GO
+
+
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  Table [dbo].[GroupDaysPlan]    Script Date: 08.09.2021 12:58:28 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[GroupDaysPlan](
+	[GroupPlanOid] [nvarchar](50) NULL,
+	[PlanName] [nvarchar](150) NULL,
+	[InsertData] [datetime] NULL,
+	[GroupDaysOid] [nvarchar](50) NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[GroupDaysPlan] ADD  CONSTRAINT [DF_GroupDaysPlan_GroupPlanOid]  DEFAULT (newid()) FOR [GroupPlanOid]
+GO
+
+ALTER TABLE [dbo].[GroupDaysPlan] ADD  CONSTRAINT [DF_GroupDaysPlan_InsertData]  DEFAULT (getdate()) FOR [InsertData]
+GO
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  Table [dbo].[GroupDaysPlanTime]    Script Date: 08.09.2021 13:00:08 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[GroupDaysPlanTime](
+	[GroupDaysPlanTimeOid] [nvarchar](50) NULL,
+	[GroupDaysPlanOid] [nvarchar](50) NULL,
+	[StartDays] [date] NULL,
+	[StartTime] [time](0) NULL,
+	[EndDays] [date] NULL,
+	[EndTime] [time](0) NULL,
+	[StartIn] [time](0) NULL,
+	[StartOut] [time](0) NULL,
+	[EndIn] [time](0) NULL,
+	[EndOut] [time](0) NULL,
+	[UserID] [int] NULL,
+	[StartNote] [nvarchar](150) NULL,
+	[EndNote] [nvarchar](150) NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[GroupDaysPlanTime] ADD  CONSTRAINT [DF_Table_1_GroupDaysTimeOid]  DEFAULT (newid()) FOR [GroupDaysPlanTimeOid]
+GO
+
+
+
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  Table [dbo].[GroupDayWorker]    Script Date: 08.09.2021 13:00:44 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[GroupDayWorker](
+	[GroupDayWorkerOid] [nvarchar](50) NULL,
+	[GroupDayOid] [nvarchar](50) NULL,
+	[UserId] [int] NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[GroupDayWorker] ADD  CONSTRAINT [DF_GroupDayWorker_GroupDayWorkerOid]  DEFAULT (newid()) FOR [GroupDayWorkerOid]
+GO
+
+
+
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  Table [dbo].[Groups]    Script Date: 08.09.2021 13:01:07 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Groups](
+	[GroupOid] [nvarchar](50) NULL,
+	[GroupName] [nvarchar](150) NULL,
+	[InsertDate] [datetime] NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Groups] ADD  CONSTRAINT [DF_Table_1_TimeGroupOid]  DEFAULT (newid()) FOR [GroupOid]
+GO
+
+ALTER TABLE [dbo].[Groups] ADD  CONSTRAINT [DF_Group_InsertDate]  DEFAULT (getdate()) FOR [InsertDate]
+GO
+
+
+
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  Table [dbo].[GroupTime]    Script Date: 08.09.2021 13:01:43 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[GroupTime](
+	[TimeOid] [nvarchar](50) NULL,
+	[GrupOid] [nvarchar](50) NULL,
+	[Days] [int] NULL,
+	[StartTime] [time](0) NULL,
+	[EndTime] [time](0) NULL,
+	[StartIn] [time](0) NULL,
+	[StartOut] [time](0) NULL,
+	[EndIn] [time](0) NULL,
+	[EndOut] [time](0) NULL,
+	[ReportStart] [nvarchar](50) NULL,
+	[RepoertEnd] [nvarchar](50) NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[GroupTime] ADD  CONSTRAINT [DF_GroupTime_TimeOid]  DEFAULT (newid()) FOR [TimeOid]
+GO
+
+
+
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  Table [dbo].[GroupWorker]    Script Date: 08.09.2021 13:02:02 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[GroupWorker](
+	[GroupWorkerOid] [nvarchar](50) NULL,
+	[GroupOid] [nvarchar](50) NULL,
+	[UserId] [int] NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[GroupWorker] ADD  CONSTRAINT [DF_GroupWorker_GroupWorkerOid]  DEFAULT (newid()) FOR [GroupWorkerOid]
+GO
+
+
+
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  View [dbo].[GroupDaysPlanView]    Script Date: 08.09.2021 13:02:36 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[GroupDaysPlanView]
+AS
+SELECT dbo.GroupDaysPlan.*, dbo.GroupDays.GroupName
+FROM     dbo.GroupDays RIGHT OUTER JOIN
+                  dbo.GroupDaysPlan ON dbo.GroupDays.DaysGroupOid = dbo.GroupDaysPlan.GroupDaysOid
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "GroupDays"
+            Begin Extent = 
+               Top = 7
+               Left = 48
+               Bottom = 287
+               Right = 242
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "GroupDaysPlan"
+            Begin Extent = 
+               Top = 7
+               Left = 290
+               Bottom = 305
+               Right = 484
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 9
+         Width = 284
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GroupDaysPlanView'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GroupDaysPlanView'
+GO
+
+
+
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  View [dbo].[GroupDaysReportView]    Script Date: 08.09.2021 13:02:55 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[GroupDaysReportView]
+AS
+SELECT dbo.USERINFO.NAME, dbo.GroupDays.DaysGroupOid, dbo.GroupDays.GroupName, dbo.GroupDaysPlan.PlanName, dbo.GroupDaysPlan.GroupDaysOid, dbo.GroupDaysPlan.GroupPlanOid, dbo.GroupDaysPlanTime.*
+FROM     dbo.USERINFO RIGHT OUTER JOIN
+                  dbo.GroupDaysPlanTime INNER JOIN
+                  dbo.GroupDaysPlan INNER JOIN
+                  dbo.GroupDays ON dbo.GroupDaysPlan.GroupDaysOid = dbo.GroupDays.DaysGroupOid ON dbo.GroupDaysPlanTime.GroupDaysPlanOid = dbo.GroupDaysPlan.GroupPlanOid ON dbo.USERINFO.USERID = dbo.GroupDaysPlanTime.UserID
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "USERINFO"
+            Begin Extent = 
+               Top = 7
+               Left = 349
+               Bottom = 217
+               Right = 600
+            End
+            DisplayFlags = 280
+            TopColumn = 1
+         End
+         Begin Table = "GroupDaysPlanTime"
+            Begin Extent = 
+               Top = 7
+               Left = 48
+               Bottom = 310
+               Right = 301
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "GroupDaysPlan"
+            Begin Extent = 
+               Top = 7
+               Left = 947
+               Bottom = 273
+               Right = 1141
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "GroupDays"
+            Begin Extent = 
+               Top = 0
+               Left = 705
+               Bottom = 268
+               Right = 899
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 14
+         Width = 284
+         Width = 2988
+         Width = 2124
+         Width = 2484
+         Width = 2580
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 2640
+         Table = 2148
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1356
+         SortOr' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GroupDaysReportView'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane2', @value=N'der = 1416
+         GroupBy = 1350
+         Filter = 1356
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GroupDaysReportView'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=2 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GroupDaysReportView'
+GO
+
+
+
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  View [dbo].[GroupDayWorkerView]    Script Date: 08.09.2021 13:03:21 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[GroupDayWorkerView]
+AS
+SELECT dbo.GroupDayWorker.*, dbo.USERINFO.NAME, dbo.GroupDays.GroupName
+FROM     dbo.GroupDayWorker LEFT OUTER JOIN
+                  dbo.GroupDays ON dbo.GroupDayWorker.GroupDayOid = dbo.GroupDays.DaysGroupOid LEFT OUTER JOIN
+                  dbo.USERINFO ON dbo.GroupDayWorker.UserId = dbo.USERINFO.USERID
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "GroupDayWorker"
+            Begin Extent = 
+               Top = 7
+               Left = 48
+               Bottom = 256
+               Right = 282
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "USERINFO"
+            Begin Extent = 
+               Top = 169
+               Left = 244
+               Bottom = 460
+               Right = 495
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "GroupDays"
+            Begin Extent = 
+               Top = 7
+               Left = 629
+               Bottom = 223
+               Right = 846
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 9
+         Width = 284
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1512
+         Width = 1200
+         Width = 1200
+         Width = 1200
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GroupDayWorkerView'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GroupDayWorkerView'
+GO
+
+
+
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  View [dbo].[GroupReportView]    Script Date: 08.09.2021 13:03:42 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[GroupReportView]
+AS
+SELECT dbo.GroupWorker.GroupWorkerOid, dbo.GroupWorker.GroupOid, dbo.GroupWorker.UserId, dbo.USERINFO.NAME, dbo.GruopTimeView.Days, dbo.GruopTimeView.StartTime, dbo.GruopTimeView.EndTime, dbo.GruopTimeView.StartIn, 
+                  dbo.GruopTimeView.StartOut, dbo.GruopTimeView.EndIn, dbo.GruopTimeView.EndOut, dbo.GruopTimeView.GroupName, dbo.GruopTimeView.ReportStart, dbo.GruopTimeView.RepoertEnd
+FROM     dbo.GroupWorker LEFT OUTER JOIN
+                  dbo.GruopTimeView ON dbo.GroupWorker.GroupOid = dbo.GruopTimeView.GrupOid LEFT OUTER JOIN
+                  dbo.USERINFO ON dbo.GroupWorker.UserId = dbo.USERINFO.USERID
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[51] 4[18] 2[12] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "GroupWorker"
+            Begin Extent = 
+               Top = 7
+               Left = 48
+               Bottom = 307
+               Right = 256
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "GruopTimeView"
+            Begin Extent = 
+               Top = 7
+               Left = 603
+               Bottom = 394
+               Right = 797
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "USERINFO"
+            Begin Extent = 
+               Top = 136
+               Left = 315
+               Bottom = 702
+               Right = 566
+            End
+            DisplayFlags = 280
+            TopColumn = 32
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 9
+         Width = 284
+         Width = 3684
+         Width = 3144
+         Width = 2592
+         Width = 2544
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1176
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1356
+         SortOrder = 1416
+         GroupBy = 1350
+         Filter = 1356
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GroupReportView'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GroupReportView'
+GO
+
+
+
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  View [dbo].[GroupWorkerView]    Script Date: 08.09.2021 13:04:18 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[GroupWorkerView]
+AS
+SELECT dbo.GroupWorker.*, dbo.GruopTimeView.TimeOid, dbo.GruopTimeView.Days, dbo.GruopTimeView.StartTime, dbo.GruopTimeView.EndTime, dbo.GruopTimeView.StartIn, dbo.GruopTimeView.StartOut, dbo.GruopTimeView.EndIn, 
+                  dbo.GruopTimeView.EndOut, dbo.GruopTimeView.GroupName
+FROM     dbo.GroupWorker LEFT OUTER JOIN
+                  dbo.GruopTimeView ON dbo.GroupWorker.GroupOid = dbo.GruopTimeView.GrupOid
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "GroupWorker"
+            Begin Extent = 
+               Top = 7
+               Left = 48
+               Bottom = 284
+               Right = 246
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "GruopTimeView"
+            Begin Extent = 
+               Top = 0
+               Left = 296
+               Bottom = 310
+               Right = 498
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 9
+         Width = 284
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GroupWorkerView'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GroupWorkerView'
+GO
+
+
+
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  View [dbo].[GruopTimeView]    Script Date: 08.09.2021 13:04:40 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[GruopTimeView]
+AS
+SELECT dbo.GroupTime.TimeOid, dbo.GroupTime.GrupOid, dbo.GroupTime.Days, dbo.GroupTime.StartTime, dbo.GroupTime.EndTime, dbo.GroupTime.StartIn, dbo.GroupTime.StartOut, dbo.GroupTime.EndIn, dbo.GroupTime.EndOut, 
+                  dbo.Groups.GroupName, dbo.GroupTime.ReportStart, dbo.GroupTime.RepoertEnd
+FROM     dbo.GroupTime LEFT OUTER JOIN
+                  dbo.Groups ON dbo.GroupTime.GrupOid = dbo.Groups.GroupOid
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[41] 4[39] 2[2] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "GroupTime"
+            Begin Extent = 
+               Top = 7
+               Left = 290
+               Bottom = 310
+               Right = 484
+            End
+            DisplayFlags = 280
+            TopColumn = 1
+         End
+         Begin Table = "Groups"
+            Begin Extent = 
+               Top = 7
+               Left = 48
+               Bottom = 148
+               Right = 242
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 9
+         Width = 284
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1176
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1356
+         SortOrder = 1416
+         GroupBy = 1350
+         Filter = 1356
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GruopTimeView'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'GruopTimeView'
+GO
+
+
+
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  View [dbo].[PlanView]    Script Date: 08.09.2021 13:05:03 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[PlanView]
+AS
+SELECT     dbo.GroupDaysPlanTime.GroupDaysPlanTimeOid, dbo.GroupDaysPlanTime.GroupDaysPlanOid, dbo.GroupDaysPlanTime.StartDays, dbo.GroupDaysPlanTime.StartTime, dbo.GroupDaysPlanTime.EndDays, dbo.GroupDaysPlanTime.EndTime, 
+                  dbo.GroupDaysPlanTime.StartIn, dbo.GroupDaysPlanTime.StartOut, dbo.GroupDaysPlanTime.EndIn, dbo.GroupDaysPlanTime.EndOut, dbo.GroupDaysPlanTime.UserID, dbo.GroupDaysPlanTime.StartNote, dbo.GroupDaysPlanTime.EndNote, 
+                  dbo.USERINFO.NAME
+FROM        dbo.GroupDaysPlanTime LEFT OUTER JOIN
+                  dbo.USERINFO ON dbo.GroupDaysPlanTime.UserID = dbo.USERINFO.USERID
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "GroupDaysPlanTime"
+            Begin Extent = 
+               Top = 7
+               Left = 48
+               Bottom = 310
+               Right = 301
+            End
+            DisplayFlags = 280
+            TopColumn = 3
+         End
+         Begin Table = "USERINFO"
+            Begin Extent = 
+               Top = 7
+               Left = 349
+               Bottom = 170
+               Right = 600
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 12
+         Width = 284
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+         Width = 1200
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1176
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1356
+         SortOrder = 1416
+         GroupBy = 1350
+         Filter = 1356
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PlanView'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'PlanView'
+GO
+
+
+
+*************************************************************************************************************
+USE [IshCedveli]
+GO
+
+/****** Object:  View [dbo].[UserInOutView]    Script Date: 08.09.2021 13:05:24 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[UserInOutView]
+AS
+SELECT     dbo.CHECKINOUT.CHECKTIME, dbo.USERINFO.NAME, dbo.USERINFO.BADGENUMBER, dbo.CHECKINOUT.USERID, dbo.USERINFO.GENDER, dbo.USERINFO.Notes
+FROM        dbo.CHECKINOUT INNER JOIN
+                  dbo.USERINFO ON dbo.CHECKINOUT.USERID = dbo.USERINFO.USERID
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "CHECKINOUT"
+            Begin Extent = 
+               Top = 6
+               Left = 38
+               Bottom = 298
+               Right = 208
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "USERINFO"
+            Begin Extent = 
+               Top = 6
+               Left = 250
+               Bottom = 276
+               Right = 461
+            End
+            DisplayFlags = 280
+            TopColumn = 59
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 9
+         Width = 284
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1176
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1356
+         SortOrder = 1416
+         GroupBy = 1350
+         Filter = 1356
+         Or = 1350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'UserInOutView'
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'UserInOutView'
+GO
+
+
+
+*************************************************************************************************************
+

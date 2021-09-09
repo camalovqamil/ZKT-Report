@@ -1,0 +1,22 @@
+﻿**Cədvəllər**
+1) USERINFO
+2) CHECKINOUT
+********
+4) GroupsDay
+5) GroupsDayPlan
+6) GroupsDayPlanTime
+7) GroupDayWorker
+*******
+8) Groups
+9) GroupWorker
+10) GroupTime
+
+**View-ler**
+1. GroupDaysPlanView
+2. GroupDaysReportView
+3. GroupDayWorkerView
+4. GroupReportView
+5. GroupWorkerView
+6. GruopTimeView
+7. PlanView
+
