@@ -53,6 +53,13 @@
                     <asp:BoundField DataField="EndOut" HeaderText="Tam ad" SortExpression="EndOut" />
                     <asp:BoundField DataField="ReportStart" HeaderText="Gəldiyi saat" SortExpression="ReportStart" DataFormatString="HH:mm" />
                     <asp:BoundField DataField="RepoertEnd" HeaderText="Çıxdığı saat" SortExpression="ReportEnd" DataFormatString="HH:mm" />
+
+                    <asp:BoundField HeaderText="Giriş fərqi" />
+                    <asp:BoundField HeaderText="Çıxış fərqi" />
+
+                    <asp:BoundField HeaderText="Qeyd"  >
+                    <ItemStyle Width="250px" />
+                    </asp:BoundField>
                 </Columns>
                 <FooterStyle BackColor="#CCCCCC" />
                 <HeaderStyle BackColor="HotPink" Font-Bold="True" ForeColor="White" Height="50px" />

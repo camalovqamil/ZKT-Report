@@ -21,6 +21,9 @@
             text-align: center;
             height: 80px;
         }
+        .auto-style10 {
+            text-align: center;
+        }
         </style>
 
      <script type = "text/javascript">
@@ -60,7 +63,7 @@
                         </asp:TemplateField>
 
                         <%--Isci elave et--%>
-                        <asp:TemplateField HeaderText="İşçi əlavə et (Bax)">
+                        <asp:TemplateField HeaderText="İşçi əlavə et">
                             <ItemTemplate>
                                 <asp:LinkButton ID="GroupAddWorker" runat="server" CommandArgument='<%# Eval("GroupOid") %>' Font-Size="18pt" ForeColor="HotPink" Text='<i class="fas fa-user-plus"></i>' OnClick="GroupAddWorker_Click"></asp:LinkButton>
                             </ItemTemplate>
@@ -114,8 +117,44 @@
                 </tr>
             </table>
 
-        </asp:Panel>
+<br />
+            <br />
+            <div style="max-height: 300px; overflow: auto;">
+                <asp:Panel ID="Panel3" runat="server" GroupingText="Qrup işçiləri">
+                    <br />
+                    <div class="auto-style10">
+                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceGroupWorker" Width="100%">
+                            <Columns>
+                                <asp:BoundField DataField="UserId" HeaderText="İşçi Id" SortExpression="UserId" />
+                                <asp:BoundField DataField="NAME" HeaderText="Tam ad" SortExpression="NAME" />
 
+
+                                <asp:TemplateField HeaderText="Qeydlər">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="WorkerNote" runat="server" CommandArgument='<%# Eval("UserId") %>' Font-Size="18pt" ForeColor="HotPink" Text='<i class="fas fa-comments"></i>' OnClick="WorkerNote_Click"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                            </Columns>
+                            <FooterStyle BackColor="#CCCCCC" />
+                            <HeaderStyle BackColor="HotPink" Font-Bold="True" ForeColor="White" Height="50px" />
+                            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                            <RowStyle Height="35px" />
+                            <SelectedRowStyle BackColor="HotPink" Font-Bold="False" ForeColor="White" />
+                            <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                            <SortedAscendingHeaderStyle BackColor="#808080" />
+                            <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                            <SortedDescendingHeaderStyle BackColor="#383838" />
+                        </asp:GridView>
+                    </div>
+                    <asp:SqlDataSource ID="SqlDataSourceGroupWorker" runat="server" ConnectionString="<%$ ConnectionStrings:IshCedveliConnectionString %>" SelectCommand="SELECT * FROM [GroupWorkerView_1] WHERE ([GroupOid] = @GroupOid)">
+                        <SelectParameters>
+                            <asp:SessionParameter Name="GroupOid" SessionField="GroupsOidUpdate" Type="String" />
+                        </SelectParameters>
+                    </asp:SqlDataSource>
+                </asp:Panel>
+            </div>
+                </asp:Panel>
     </div>
 </asp:Content>
 
