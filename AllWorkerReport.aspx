@@ -22,7 +22,7 @@
         <asp:Label ID="Label1" runat="server" Text="-" Width="30px"></asp:Label>
         <asp:TextBox ID="TextBox2" runat="server" CssClass="Font" TextMode="Date" Width="15%"></asp:TextBox>
         &nbsp;
-        <asp:Button ID="Button1" runat="server" CssClass="Font" Height="40px" Text="Report Et" Width="20%" />
+        <asp:Button ID="Button1" runat="server" CssClass="Font" Height="40px" Text="Report Et" Width="20%" OnClick="Button1_Click1" />
         </asp:Panel>
     </div>
     <br />
@@ -36,7 +36,7 @@
                     <asp:CommandField SelectText='<i class="far fa-hand-pointer" style="font-size:18pt;" ></i>' ShowSelectButton="True" HeaderText="Seçim" />
                     <asp:BoundField DataField="USERID" HeaderText="İşçi İD" ReadOnly="True" SortExpression="USERID" />
                     <asp:BoundField DataField="NAME" HeaderText="Tam ad" SortExpression="NAME" />
-                    <asp:BoundField DataField="CHECKTIME" HeaderText="Saat" SortExpression="CHECKTIME" ReadOnly="True" />
+                    <asp:BoundField DataField="CHECKTIME" HeaderText="Saat" SortExpression="CHECKTIME" />
                     <asp:BoundField DataField="GENDER" HeaderText="Cinsi" SortExpression="GENDER" />
                 </Columns>
 

@@ -147,6 +147,18 @@ public partial class GroupReport : System.Web.UI.Page
         for (int i = 0; i < GridView1.Rows.Count; i++)
         {
 
+            baglan();
+            komut.Connection = baglanti;
+            komut.CommandText = "Select *from GroupNoteView where GroupOid='" + DropDownList1.Text+ "' and TimeData='"+TextBox1.Text+ "' and UserID='"+Convert.ToInt32( GridView1.Rows[i].Cells[0].Text)+"'";
+            IDataReader dr2 = komut.ExecuteReader();
+            while (dr2.Read())
+            {
+                GridView1.Rows[i].Cells[13].Text = dr2["Note"].ToString();
+            }
+            komut.Dispose();
+
+
+
             GridView1.Rows[i].Cells[10].Text = "";
             GridView1.Rows[i].Cells[9].Text = "";
 
@@ -179,6 +191,10 @@ public partial class GroupReport : System.Web.UI.Page
                     GridView1.Rows[i].Cells[9].BackColor = System.Drawing.Color.Red;
                 }
 
+                TimeSpan StartDifference = Convert.ToDateTime(GridView1.Rows[i].Cells[3].Text) - Convert.ToDateTime(GridView1.Rows[i].Cells[9].Text);
+
+                GridView1.Rows[i].Cells[11].Text = StartDifference.ToString();
+
                 GridView1.Rows[i].Cells[9].ForeColor = System.Drawing.Color.White;
             }
 
@@ -198,6 +214,10 @@ public partial class GroupReport : System.Web.UI.Page
                 {
                     GridView1.Rows[i].Cells[10].BackColor = System.Drawing.Color.Red;
                 }
+
+                TimeSpan EndDifference = Convert.ToDateTime(GridView1.Rows[i].Cells[10].Text) - Convert.ToDateTime(GridView1.Rows[i].Cells[4].Text);
+
+                GridView1.Rows[i].Cells[12].Text = EndDifference.ToString();
             }
             else
             {

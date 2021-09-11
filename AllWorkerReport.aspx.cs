@@ -37,12 +37,17 @@ public partial class AllWorkerReport : System.Web.UI.Page
             }
 
 
-            GridView1.Rows[i].Cells[3].Text =Convert.ToDateTime( GridView1.Rows[i].Cells[3].Text).ToString("dd.MM.yyyy hh:MM:ss");
+            //GridView1.Rows[i].Cells[3].Text =Convert.ToDateTime(GridView1.Rows[i].Cells[3].Text).ToString("HH:MM:ss");
 
         }
     }
 
     protected void Button1_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void Button1_Click1(object sender, EventArgs e)
     {
 
     }

@@ -65,7 +65,10 @@ public partial class Groups : System.Web.UI.Page
             TextBox1.Text = dr["GroupName"].ToString();
             Button3.Enabled = true;
             Button1.Enabled = false;
+            
         }
+        Panel2.GroupingText = "Qrup: " + (sender as LinkButton).Text + " - Məlumatları";
+        Panel3.GroupingText = "Qrup: " + (sender as LinkButton).Text + " - İşçiləri";
     }
 
     protected void Button1_Click(object sender, EventArgs e)
@@ -111,5 +114,11 @@ public partial class Groups : System.Web.UI.Page
     protected void GroupParametr_Click(object sender, EventArgs e)
     {
         Response.Redirect("GroupsTime.aspx");
+    }
+
+    protected void WorkerNote_Click(object sender, EventArgs e)
+    {
+        Session["WorkerNoteID"] = (sender as LinkButton).CommandArgument;
+        Response.Redirect("GroupWorkerNote.aspx");
     }
 }
